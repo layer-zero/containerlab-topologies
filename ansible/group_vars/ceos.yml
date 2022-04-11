@@ -1,0 +1,7 @@
+---
+# When using the (EOS) CLI use:
+ansible_connection: ansible.netcommon.network_cli
+ansible_network_os: arista.eos.eos
+ansible_user: ec2-user
+ansible_become: yes
+ansible_become_method: enable

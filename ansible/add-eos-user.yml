@@ -1,0 +1,21 @@
+---
+- name: Add user with SSH key
+  hosts: ceos
+
+  vars:
+    'ansible_user': 'admin'
+    'ansible_password': 'admin'
+    'eos_user': 'ec2-user'
+
+  tasks:
+    - name: Add User without password
+      eos_user:
+        name: '{{ eos_user }}'
+        nopassword: yes
+        state: present
+    - name:  Assign privileges and set SSH key
+      eos_user:
+        name: '{{ eos_user }}'
+        privilege: 15
+        role: network-admin
+        sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
