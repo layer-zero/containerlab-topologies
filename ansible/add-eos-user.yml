@@ -1,6 +1,7 @@
 ---
 - name: Add user with SSH key
   hosts: ceos
+  gather_facts: no
 
   vars:
     'ansible_user': 'admin'
