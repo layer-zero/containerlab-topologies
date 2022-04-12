@@ -1,0 +1,19 @@
+---
+- name: Configure common settings according to template
+  hosts: ceos
+  gather_facts: no
+  collections:
+    - arista.eos
+
+  vars:
+    base_name: ceos-common
+  
+  tasks:
+    - name: Create configurations from {{ base_name }} template
+      template:
+        src: templates/{{ base_name }}.j2
+        dest: configs/{{ base_name }}.cfg
+
+    - name: Deploy configurations to devices
+      eos_config:
+        src: configs/{{ base_name }}.cfg

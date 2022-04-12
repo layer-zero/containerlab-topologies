@@ -1,0 +1,8 @@
+!
+aaa authentication login default local
+aaa authorization exec default local
+!
+ip routing
+ip route 0.0.0.0/0 172.20.20.1
+!
+ip name-server 8.8.8.8
