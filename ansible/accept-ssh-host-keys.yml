@@ -1,7 +1,15 @@
 - hosts: ceos
   gather_facts: no
+  connection: local
 
   tasks:
-  - name: Accept SSH key for each host 
-    connection: local
-    shell: "ssh-keyscan -H {{ inventory_hostname | lower }} >> ~/.ssh/known_hosts"
+  - name: Register SSH key for each host
+    command: ssh-keyscan {{ inventory_hostname | lower }}
+    register: keyscan
+  
+  - name: Add SSH keys to known_hosts
+    lineinfile:
+      name: ~/.ssh/known_hosts
+      create: yes
+      line: '{{ item }}'
+    loop: '{{ keyscan.stdout_lines }}'
