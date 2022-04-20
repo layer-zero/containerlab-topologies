@@ -6,7 +6,12 @@
   - name: Register SSH key for each host
     command: ssh-keyscan {{ inventory_hostname | lower }}
     register: keyscan
-  
+
+  - name: Delete existing known_hosts file
+    file:
+      path: ~/.ssh/known_hosts
+      state: absent
+
   - name: Add SSH keys to known_hosts
     lineinfile:
       name: ~/.ssh/known_hosts
