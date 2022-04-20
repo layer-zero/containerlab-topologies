@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+if [[ $# = 1 ]]; then
+    sudo containerlab deploy -t $1
+else
+    echo "Usage: deploy <containerlab_topology.yml>"
+fi
