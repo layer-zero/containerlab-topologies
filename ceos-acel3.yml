@@ -9,16 +9,27 @@ topology:
 
   nodes:
     spine1:
+      mgmt_ipv4: 172.20.20.11
     spine2:
+      mgmt_ipv4: 172.20.20.12
     spine3:
+      mgmt_ipv4: 172.20.20.13
     leaf1:
+      mgmt_ipv4: 172.20.20.21
     leaf2:
+      mgmt_ipv4: 172.20.20.22
     leaf3:
+      mgmt_ipv4: 172.20.20.23
     leaf4:
+      mgmt_ipv4: 172.20.20.24
     borderleaf1:
+      mgmt_ipv4: 172.20.20.25
     borderleaf2:
+      mgmt_ipv4: 172.20.20.26
     host1:
+      mgmt_ipv4: 172.20.20.31
     host2:
+      mgmt_ipv4: 172.20.20.32
 
   links:
     - endpoints: ["spine1:eth1", "spine2:eth1"]
