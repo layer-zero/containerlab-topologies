@@ -1,5 +1,5 @@
 ---
-name: ceos-test
+name: ceos-simple
 
 topology:
   nodes:
