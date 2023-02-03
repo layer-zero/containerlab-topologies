@@ -5,10 +5,10 @@ topology:
   nodes:
     ceos1:
       kind: ceos
-      image: ceos:4.26.5M
+      image: ceos:4.28.5M
     ceos2:
       kind: ceos
-      image: ceos:4.26.5M
+      image: ceos:4.28.5M
 
   links:
     - endpoints: ["ceos1:eth1", "ceos2:eth1"]
