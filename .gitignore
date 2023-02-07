@@ -3,3 +3,4 @@ clab*
 .*.yml
 configs
 *.bak
+.python-version
