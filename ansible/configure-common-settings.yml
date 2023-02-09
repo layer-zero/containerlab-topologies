@@ -1,5 +1,5 @@
 ---
-- name: Configure common settings according to template
+- name: Configure common settings according to template for Arista cEOS devices
   hosts: ceos
   gather_facts: no
   collections:
@@ -14,6 +14,7 @@
         src: templates/{{ base_name }}.j2
         dest: configs/{{ base_name }}.cfg
 
-    - name: Deploy configurations to devices
+    - name: Deploy configurations to devices and save configurations
       eos_config:
         src: configs/{{ base_name }}.cfg
+        save_when: modified

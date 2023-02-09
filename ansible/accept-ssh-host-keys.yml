@@ -1,4 +1,5 @@
-- hosts: ceos
+- name: Accept SSH host keys for Arista cEOS devices
+  hosts: ceos
   gather_facts: no
   connection: local
 
@@ -7,9 +8,10 @@
     command: ssh-keyscan {{ inventory_hostname | lower }}
     register: keyscan
 
-  - name: Delete existing known_hosts file
-    file:
-      path: ~/.ssh/known_hosts
+  - name: Delete existing lines from known_hosts
+    lineinfile:
+      name: ~/.ssh/known_hosts
+      regexp: '^{{ inventory_hostname | lower }}'
       state: absent
 
   - name: Add SSH keys to known_hosts
