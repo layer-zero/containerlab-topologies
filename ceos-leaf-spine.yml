@@ -12,6 +12,10 @@ topology:
       mgmt_ipv4: 172.20.20.11
     spine2:
       mgmt_ipv4: 172.20.20.12
+    host1:
+      mgmt_ipv4: 172.20.20.31
+    host2:
+      mgmt_ipv4: 172.20.20.32
     leaf1:
       mgmt_ipv4: 172.20.20.21
       startup-delay: 300
@@ -24,28 +28,27 @@ topology:
     leaf4:
       mgmt_ipv4: 172.20.20.24
       startup-delay: 600
-    host1:
-      mgmt_ipv4: 172.20.20.31
-      startup-delay: 900
-    host2:
-      mgmt_ipv4: 172.20.20.32
-      startup-delay: 900
 
   links:
     - endpoints: ["spine1:eth1", "spine2:eth1"]
-    - endpoints: ["spine1:eth2", "leaf1:eth3"]
-    - endpoints: ["spine1:eth3", "leaf2:eth3"]
-    - endpoints: ["spine1:eth4", "leaf3:eth3"]
-    - endpoints: ["spine1:eth5", "leaf4:eth3"]
-    - endpoints: ["spine2:eth2", "leaf1:eth4"]
-    - endpoints: ["spine2:eth3", "leaf2:eth4"]
-    - endpoints: ["spine2:eth4", "leaf3:eth4"]
-    - endpoints: ["spine2:eth5", "leaf4:eth4"]
+    - endpoints: ["spine1:eth2", "spine2:eth2"]
+    - endpoints: ["spine1:eth3", "leaf1:eth3"]
+    - endpoints: ["spine1:eth4", "leaf2:eth3"]
+    - endpoints: ["spine1:eth5", "leaf3:eth3"]
+    - endpoints: ["spine1:eth6", "leaf4:eth3"]
+    - endpoints: ["spine2:eth3", "leaf1:eth4"]
+    - endpoints: ["spine2:eth4", "leaf2:eth4"]
+    - endpoints: ["spine2:eth5", "leaf3:eth4"]
+    - endpoints: ["spine2:eth6", "leaf4:eth4"]
     - endpoints: ["leaf1:eth1", "leaf2:eth1"]
     - endpoints: ["leaf1:eth2", "leaf2:eth2"]
     - endpoints: ["leaf3:eth1", "leaf4:eth1"]
     - endpoints: ["leaf3:eth2", "leaf4:eth2"]
-    - endpoints: ["host1:eth1", "leaf1:eth6"]
-    - endpoints: ["host1:eth2", "leaf2:eth6"]
-    - endpoints: ["host2:eth1", "leaf3:eth6"]
-    - endpoints: ["host2:eth2", "leaf4:eth6"]
+    - endpoints: ["host1:eth1", "leaf1:eth5"]
+    - endpoints: ["host1:eth2", "leaf2:eth5"]
+    - endpoints: ["host1:eth3", "leaf1:eth6"]
+    - endpoints: ["host1:eth4", "leaf2:eth6"]
+    - endpoints: ["host2:eth1", "leaf3:eth5"]
+    - endpoints: ["host2:eth2", "leaf4:eth5"]
+    - endpoints: ["host2:eth3", "leaf3:eth6"]
+    - endpoints: ["host2:eth4", "leaf4:eth6"]
