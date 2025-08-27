@@ -1,0 +1,20 @@
+---
+name: junos-simple
+prefix: ''
+
+topology:
+  defaults:
+    kind: cjunosevolved
+    image: cjunosevolved:25.2R1.8-EVO
+
+  nodes:
+    junos1:
+      mgmt-ipv4: 172.20.20.11
+      startup-config: junos1.cfg
+    junos2:
+      mgmt-ipv4: 172.20.20.12
+      startup-config: junos2.cfg
+
+  links:
+    - endpoints: ["junos1:eth4", "junos2:eth4"]
+    - endpoints: ["junos1:eth5", "junos2:eth5"]
