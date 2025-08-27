@@ -1,12 +1,14 @@
 ---
-- name: Add user with SSH key
+- name: Add user with SSH key to Arista cEOS devices
   hosts: ceos
   gather_facts: no
+  collections:
+    - arista.eos
 
   vars:
     ansible_user: admin
     ansible_password: admin
-    eos_user: ec2-user
+    eos_user: tom
 
   tasks:
     - name: Add User without password
