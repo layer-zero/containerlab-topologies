@@ -1,0 +1,28 @@
+---
+name: junos-simple
+prefix: ''
+
+topology:
+  defaults:
+    kind: cjunosevolved
+    image: cjunosevolved:25.2R1.8-EVO
+
+  nodes:
+    junos1:
+      mgmt-ipv4: 172.20.20.11
+      startup-config: junos1.cfg
+    junos2:
+      mgmt-ipv4: 172.20.20.12
+      startup-config: junos2.cfg
+    radius:
+      kind: linux
+      image: freeradius/freeradius-server:latest-3.2-alpine
+      mgmt-ipv4: 172.20.20.100
+      cmd: -X
+      binds:
+        - radius-config/clients.conf:/etc/raddb/clients.conf
+        - radius-config/authorize:/etc/raddb/mods-config/files/authorize
+
+  links:
+    - endpoints: ["junos1:eth4", "junos2:eth4"]
+    - endpoints: ["junos1:eth5", "junos2:eth5"]

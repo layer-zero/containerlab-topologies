@@ -1,0 +1,18 @@
+alice           Cleartext-Password := 1234QWer
+                Service-Type = Administrative-User,
+                Juniper-Local-User-Name = netadmin
+
+bob             Cleartext-Password := 1234QWer
+                Service-Type = Login-User
+
+charlie         Cleartext-Password := 1234QWer
+                Service-Type = Login-User,
+                Juniper-User-Permissions += "interface interface-control configure",
+                Juniper-Allow-Commands += "(ping)|(traceroute)",
+                Juniper-Deny-Commands += "(request)|(restart)",
+                Juniper-Allow-Configuration += "(system)",
+                Juniper-Deny-Configuration += "(system login)|(system radius-server)"
+
+tom             Cleartext-Password := 1234QWer
+                Service-Type = Administrative-User,
+                Juniper-Local-User-Name = netadmin
