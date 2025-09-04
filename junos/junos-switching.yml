@@ -1,0 +1,48 @@
+---
+name: junos-simple
+prefix: ''
+
+topology:
+  defaults:
+    kind: cjunosevolved
+    image: cjunosevolved:25.2R1.8-EVO
+
+  nodes:
+    junos1:
+      mgmt-ipv4: 172.20.20.11
+      startup-config: junos1-switching.cfg
+    junos2:
+      mgmt-ipv4: 172.20.20.12
+      startup-config: junos2-switching.cfg
+    host1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.1.1.1/24 dev eth1  
+        - ip route add 10.0.0.0/8 via 10.1.1.254    
+    host2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.2.2.2/24 dev eth1  
+        - ip route add 10.0.0.0/8 via 10.2.2.254    
+    host3:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.1.1.3/24 dev eth1  
+        - ip route add 10.0.0.0/8 via 10.1.1.254    
+    host4:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 10.2.2.4/24 dev eth1  
+        - ip route add 10.0.0.0/8 via 10.2.2.254    
+
+  links:
+    - endpoints: ["junos1:eth4", "junos2:eth4"]
+    - endpoints: ["junos1:eth5", "junos2:eth5"]
+    - endpoints: ["host1:eth1", "junos1:eth6"]
+    - endpoints: ["host2:eth1", "junos1:eth7"]
+    - endpoints: ["host3:eth1", "junos2:eth6"]
+    - endpoints: ["host4:eth1", "junos2:eth7"]
