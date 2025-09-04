@@ -10,10 +10,10 @@ topology:
   nodes:
     junos1:
       mgmt-ipv4: 172.20.20.11
-      startup-config: junos1.cfg
+      startup-config: junos1-base.cfg
     junos2:
       mgmt-ipv4: 172.20.20.12
-      startup-config: junos2.cfg
+      startup-config: junos2-base.cfg
 
   links:
     - endpoints: ["junos1:eth4", "junos2:eth4"]
