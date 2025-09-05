@@ -3,38 +3,41 @@ name: junos-simple
 prefix: ''
 
 topology:
-  defaults:
-    kind: cjunosevolved
-    image: cjunosevolved:25.2R1.8-EVO
+  groups:
+    junos:
+      kind: cjunosevolved
+      image: cjunosevolved:25.2R1.8-EVO
+    hosts:
+      kind: linux
+      # image: alpine:latest
+      image: mlabbe/iperf3:latest
 
   nodes:
     junos1:
+      group: junos
       mgmt-ipv4: 172.20.20.11
       startup-config: junos1-switching.cfg
     junos2:
+      group: junos
       mgmt-ipv4: 172.20.20.12
       startup-config: junos2-switching.cfg
     host1:
-      kind: linux
-      image: alpine:latest
+      group: hosts
       exec:
         - ip addr add 10.1.1.1/24 dev eth1  
         - ip route add 10.0.0.0/8 via 10.1.1.254    
     host2:
-      kind: linux
-      image: alpine:latest
+      group: hosts
       exec:
         - ip addr add 10.2.2.2/24 dev eth1  
         - ip route add 10.0.0.0/8 via 10.2.2.254    
     host3:
-      kind: linux
-      image: alpine:latest
+      group: hosts
       exec:
         - ip addr add 10.1.1.3/24 dev eth1  
         - ip route add 10.0.0.0/8 via 10.1.1.254    
     host4:
-      kind: linux
-      image: alpine:latest
+      group: hosts
       exec:
         - ip addr add 10.2.2.4/24 dev eth1  
         - ip route add 10.0.0.0/8 via 10.2.2.254    
