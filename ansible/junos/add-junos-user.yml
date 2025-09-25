@@ -1,0 +1,23 @@
+---
+- name: Add user with SSH key to Juniper Junos devices
+  hosts: cjunosevolved
+  connection: juniper.device.pyez
+  collections:
+    - juniper.device
+
+  vars:
+    ansible_user: admin
+    ansible_password: 1234QWer
+    junos_user: tom
+
+  tasks:
+    - name: Check NETCONF connectivity
+      wait_for: host={{ ansible_ssh_host }} port=830 timeout=5
+
+    - name: "Add super user {{ junos_user }} with local SSH key"
+      config:
+        load: set
+        lines:
+         - "set system login user {{ junos_user }} class super-user authentication ssh-rsa \"{{ lookup('file', '~/.ssh/id_rsa.pub') }}\""
+        commit: yes
+

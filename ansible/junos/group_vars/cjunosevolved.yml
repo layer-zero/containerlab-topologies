@@ -1,0 +1,4 @@
+---
+ansible_connection: local
+ansible_user: tom
+ansible_python_interpreter: $(which python)
