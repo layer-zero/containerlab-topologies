@@ -1,0 +1,20 @@
+---
+name: junos-simple
+prefix: ''
+
+topology:
+  defaults:
+    kind: cjunosevolved
+    image: cjunosevolved:25.2R1.8-EVO
+
+  nodes:
+    junos-ztp:
+      suppress-startup-config: true
+
+    dhcp:
+      kind: linux
+      image: jonasal/kea-dhcp4:3.1.1-alpine
+      mgmt-ipv4: 172.20.20.100
+      cmd: -c /kea/config/dhcp4.json
+      binds:
+        - kea-dhcp-config:/kea/config
