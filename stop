@@ -2,5 +2,5 @@
 if [[ $# = 1 ]]; then
     sudo containerlab destroy -t $1
 else
-    echo "Usage: destroy <containerlab_topology.yml>"
+    echo "Usage: stop <containerlab_topology.yml>"
 fi
