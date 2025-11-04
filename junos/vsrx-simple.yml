@@ -1,0 +1,20 @@
+---
+name: junos-simple
+prefix: ''
+
+topology:
+  defaults:
+    kind: juniper_vsrx
+    image: vrnetlab/juniper_vsrx:20.3R1.8
+
+  nodes:
+    vsrx1:
+      mgmt-ipv4: 172.20.20.11
+      startup-config: vsrx1-base.cfg
+    vsrx2:
+      mgmt-ipv4: 172.20.20.12
+      startup-config: vsrx2-base.cfg
+
+  links:
+    - endpoints: ["vsrx1:ge-0/0/0", "vsrx2:ge-0/0/0"]
+    - endpoints: ["vsrx1:ge-0/0/1", "vsrx2:ge-0/0/1"]
