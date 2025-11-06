@@ -1,0 +1,28 @@
+---
+name: vsrx-radius
+prefix: ''
+
+topology:
+  defaults:
+    kind: juniper_vsrx
+    image: vrnetlab/juniper_vsrx:20.3R1.8
+
+  nodes:
+    vsrx1:
+      mgmt-ipv4: 172.20.20.11
+      startup-config: vsrx1-base.cfg
+    vsrx2:
+      mgmt-ipv4: 172.20.20.12
+      startup-config: vsrx2-base.cfg
+    radius:
+      kind: linux
+      image: freeradius/freeradius-server:latest-3.2-alpine
+      mgmt-ipv4: 172.20.20.100
+      cmd: -X
+      binds:
+        - radius-config/clients.conf:/etc/raddb/clients.conf
+        - radius-config/authorize:/etc/raddb/mods-config/files/authorize
+
+  links:
+    - endpoints: ["vsrx1:eth4", "vsrx2:eth4"]
+    - endpoints: ["vsrx1:eth5", "vsrx2:eth5"]
