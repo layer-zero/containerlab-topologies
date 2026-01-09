@@ -1,0 +1,21 @@
+---
+- name: Get device hostname
+  hosts: cjunosevolved
+  connection: juniper.device.pyez
+  collections:
+    - juniper.device
+
+  tasks:
+    - name: "Get device hostname for device" 
+      juniper.device.config:
+        retrieve: committed
+        filter: <configuration><system><host-name/></system></configuration>
+        format: xml
+      register: hostname_config
+
+    - name: Extract hostname from facts
+      set_fact:
+        device_hostname: "{{ hostname_config['config_parsed']['configuration']['system']['host-name'] }}"
+
+    - debug:
+        msg: "The hostname is {{ device_hostname }}"
