@@ -1,0 +1,25 @@
+---
+name: vsrx-medium
+prefix: ''
+
+topology:
+  defaults:
+    kind: juniper_vsrx
+    image: vrnetlab/juniper_vsrx:20.3R1.8
+
+  nodes:
+    vsrx1:
+      mgmt-ipv4: 172.20.20.11
+      startup-config: vsrx1-base.cfg
+    vsrx2:
+      mgmt-ipv4: 172.20.20.12
+      startup-config: vsrx2-base.cfg
+    vsrx3:
+      mgmt-ipv4: 172.20.20.13
+      startup-config: vsrx3-base.cfg
+
+  links:
+    - endpoints: ["vsrx1:ge-0/0/0", "vsrx2:ge-0/0/0"]
+    - endpoints: ["vsrx1:ge-0/0/2", "vsrx2:ge-0/0/2"]
+    - endpoints: ["vsrx1:ge-0/0/1", "vsrx3:ge-0/0/0"]
+    - endpoints: ["vsrx2:ge-0/0/1", "vsrx3:ge-0/0/1"]
