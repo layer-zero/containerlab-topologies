@@ -1,0 +1,25 @@
+---
+- name: Create multiple VLANs
+  hosts: cjunosevolved
+  connection: juniper.device.pyez
+  collections:
+    - juniper.device
+
+  vars:
+    vlan_ids: [10, 20, 30, 40, 50]
+
+  tasks:
+    - name: Verify NETCONF connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 830
+        connect_timeout: 45
+
+    - name: Configure the VLANs
+      juniper.device.config:
+        load: set
+        lines:
+         - "set vlans VLAN-{{ item }} vlan-id {{ item }}"
+        timeout: 45
+        commit: yes
+      loop: "{{ vlan_ids }}"

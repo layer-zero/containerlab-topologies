@@ -1,14 +1,17 @@
 ---
 name: ceos-simple
+prefix: ''
 
 topology:
+  defaults:
+    kind: ceos
+    image: ceos:4.34.4M
+
   nodes:
     ceos1:
-      kind: ceos
-      image: ceos:4.28.5M
+      mgmt-ipv4: 172.20.20.11
     ceos2:
-      kind: ceos
-      image: ceos:4.28.5M
+      mgmt-ipv4: 172.20.20.12
 
   links:
     - endpoints: ["ceos1:eth1", "ceos2:eth1"]

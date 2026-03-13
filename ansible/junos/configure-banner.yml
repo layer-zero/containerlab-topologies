@@ -1,0 +1,21 @@
+---
+- name: Create a device banner
+  hosts: cjunosevolved
+  connection: juniper.device.pyez
+  collections:
+    - juniper.device
+
+  tasks:
+    - name: Verify NETCONF connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 830
+        connect_timeout: 45
+
+    - name: "Configure the Banner"
+      juniper.device.config:
+        load: set
+        lines:
+         - set system login message "*** Banner set by Ansible! ***"
+        timeout: 45
+        commit: yes

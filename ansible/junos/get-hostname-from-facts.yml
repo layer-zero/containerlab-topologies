@@ -1,0 +1,18 @@
+---
+- name: Get device hostname
+  hosts: cjunosevolved
+  connection: juniper.device.pyez
+  collections:
+    - juniper.device
+
+  tasks:
+    - name: "Get device hostname for device" 
+      juniper.device.facts:
+      register: device_facts
+
+    - name: Extract hostname from facts
+      set_fact:
+        device_hostname: "{{ device_facts.ansible_facts.junos.hostname }}"
+
+    - debug:
+        msg: "The hostname is {{ device_hostname }}"
